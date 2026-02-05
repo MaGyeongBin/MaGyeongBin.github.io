@@ -1,0 +1,64 @@
+---
+# Overriding theme styles to force a dark look
+---
+
+@import "simply-cyan";
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: #0d1117;
+  color: #e6edf3;
+}
+
+a {
+  color: #58a6ff;
+}
+
+a:visited {
+  color: #8e96f3;
+}
+
+a:hover,
+a:focus {
+  color: #79c0ff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #e6edf3;
+}
+
+blockquote {
+  border-left: 4px solid #30363d;
+  color: #c9d1d9;
+  background: #161b22;
+}
+
+pre,
+code {
+  background: #161b22;
+  color: #e6edf3;
+}
+
+table {
+  background: #0d1117;
+  color: #e6edf3;
+}
+
+hr {
+  border-color: #30363d;
+}
+
+.site-header,
+.site-footer {
+  background: #0b0f14;
+  color: #c9d1d9;
+  border-color: #30363d;
+}
+
+.post-title,
+.post-title a {
+  color: #e6edf3;
+}
