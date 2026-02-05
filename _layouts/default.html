@@ -1,0 +1,23 @@
+{%- include head.html -%}
+<body>
+  {%- include functions.html -%}
+  {%- include header.html -%}
+
+  <div class="hero-search">
+    <form class="search-form" method="get" action="https://www.google.com/search" onsubmit="this.q.value='site:{{ site.url }} '+this.q.value">
+      <input type="text" name="q" placeholder="Search this site" aria-label="Search">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+
+  <div class="layout-with-sidebar">
+    {%- include sidebar.html -%}
+    <main class="page_content" aria-label="Content">
+      {{ content | markdownify }}
+    </main>
+  </div>
+
+  {%- include footer.html -%}
+  {%- include functionsscript.html -%}
+</body>
+</html>

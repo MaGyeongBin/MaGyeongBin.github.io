@@ -1,0 +1,718 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>SMPL</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", "Noto Sans Arabic", "Noto Sans Hebrew", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="1c9e71bd-aa77-80c2-a644-d30e26473382" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">💣</span></div><h1 class="page-title" dir="auto">SMPL</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><h3 id="1c9e71bd-aa77-8078-b8dd-ec6eee16236b" class="">Topology</h3></div><div style="display:contents" dir="auto"><p id="1c9e71bd-aa77-80e3-a780-ea800fd77061" class="">토폴로지(Topology)는 기하학적 물체의 기본적인 구조와 연결성을 연구하는 수학의 한 분야입니다. 3D 모델링에서 토폴로지는:</p></div><div style="display:contents" dir="auto"><ul id="1c9e71bd-aa77-8009-8c68-f11f6d2bb4cf" class="bulleted-list"><li style="list-style-type:disc">정점(Vertices), 모서리(Edges), 면(Faces)의 연결 구조를 의미</li></ul></div><div style="display:contents" dir="auto"><ul id="1c9e71bd-aa77-80bc-badf-c93c0e9dd44b" class="bulleted-list"><li style="list-style-type:disc">메쉬의 표면이 어떻게 구성되고 연결되어 있는지를 나타냄</li></ul></div><div style="display:contents" dir="auto"><ul id="1c9e71bd-aa77-808c-9c1a-c3a828724c38" class="bulleted-list"><li style="list-style-type:disc">폴리곤 메쉬의 품질과 변형 가능성에 직접적인 영향을 미침</li></ul></div><div style="display:contents" dir="auto"><p id="1c9e71bd-aa77-80c3-8e23-d4d95b2fc6aa" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="1c9e71bd-aa77-80aa-b66a-ce69de8a3167" class="">Skinned vertex-based model</h3></div><div style="display:contents" dir="auto"><p id="1c9e71bd-aa77-80e7-8e52-c3a310ee7bec" class="">Skinned vertex-based model은 3D 캐릭터 애니메이션에서 사용되는 모델링 방식으로, 각 정점(vertex)이 스킨(skin)에 바인딩되어 골격 구조의 움직임에 따라 변형되는 방식을 말합니다.</p></div><div style="display:contents" dir="auto"><ul id="1c9e71bd-aa77-8051-84cf-cb7bf0beb126" class="bulleted-list"><li style="list-style-type:disc">각 정점은 하나 이상의 뼈(bone)에 가중치(weight)를 가지고 연결됨</li></ul></div><div style="display:contents" dir="auto"><ul id="1c9e71bd-aa77-8077-a3fa-ef7772a2e366" class="bulleted-list"><li style="list-style-type:disc">뼈대(skeleton)의 움직임에 따라 정점들이 자연스럽게 변형됨</li></ul></div><div style="display:contents" dir="auto"><ul id="1c9e71bd-aa77-8092-85e7-d0766e88829d" class="bulleted-list"><li style="list-style-type:disc">스키닝(skinning) 과정을 통해 캐릭터의 표면 메쉬가 뼈대 구조에 바인딩됨</li></ul></div><div style="display:contents" dir="auto"><ul id="1c9e71bd-aa77-8036-9711-c13602ca1736" class="bulleted-list"><li style="list-style-type:disc">Linear Blend Skinning(LBS)이 가장 기본적이고 널리 사용되는 스키닝 방식</li></ul></div><div style="display:contents" dir="auto"><p id="1c9e71bd-aa77-80d0-bb26-e23f01765fde" class="">이러한 모델링 방식은 캐릭터 애니메이션을 효율적으로 제어할 수 있게 해주며, 자연스러운 변형과 움직임을 가능하게 합니다.</p></div><div style="display:contents" dir="auto"><h3 id="1c9e71bd-aa77-809a-8a1a-c039adc7f4ea" class="">Skinning</h3></div><div style="display:contents" dir="auto"><p id="1c9e71bd-aa77-805e-be95-c88fc814bf40" class="">스키닝은 3D 캐릭터의 표면 메쉬(mesh)를 내부의 뼈대 구조(skeleton)에 연결하는 과정을 의미합니다. 이는 마치 실제 생물의 피부가 뼈와 근육에 부착되어 있는 것과 유사한 개념입니다.</p></div><div style="display:contents" dir="auto"><ul id="1c9e71bd-aa77-8079-ae90-f3a764c6cd4b" class="bulleted-list"><li style="list-style-type:disc">각 정점(vertex)마다 영향을 받는 뼈와 그 영향력(weight)을 정의</li></ul></div><div style="display:contents" dir="auto"><ul id="1c9e71bd-aa77-801e-bcc6-f71a1ac87207" class="bulleted-list"><li style="list-style-type:disc">캐릭터가 움직일 때 표면 메쉬가 자연스럽게 따라가도록 함</li></ul></div><div style="display:contents" dir="auto"><ul id="1c9e71bd-aa77-8038-ba77-fd3f1a0177d3" class="bulleted-list"><li style="list-style-type:disc">캐릭터의 관절 부위가 구부러질 때 자연스러운 변형을 가능하게 함</li></ul></div><div style="display:contents" dir="auto"><p id="1c9e71bd-aa77-80ac-a0cc-c579fb1475e5" class="">스키닝 품질은 웨이트 페인팅(weight painting)이라는 과정을 통해 조절할 수 있으며, 이는 각 정점이 어떤 뼈로부터 얼마나 영향을 받을지를 결정합니다.</p></div><div style="display:contents" dir="auto"><h3 id="1c9e71bd-aa77-8083-99cc-d8567828d941" class="">다양한 스키닝 방식</h3></div><div style="display:contents" dir="auto"><p id="1c9e71bd-aa77-80cb-9dc5-d784d92b00e2" class="">3D 캐릭터 애니메이션에서 사용되는 주요 스키닝 방식들은 다음과 같습니다:</p></div><div style="display:contents" dir="auto"><ul id="1c9e71bd-aa77-80e3-b47e-e1b7c18833dc" class="bulleted-list"><li style="list-style-type:disc"><strong>Linear Blend Skinning (LBS):</strong> 가장 기본적인 스키닝 방식으로, 각 정점의 위치를 영향을 주는 본들의 가중치 합으로 계산합니다. 계산이 단순하고 빠르지만, 관절 부위에서 캔디 래퍼(candy-wrapper) 아티팩트가 발생할 수 있습니다.</li></ul></div><div style="display:contents" dir="auto"><ul id="1c9e71bd-aa77-8024-8a04-c106798ffcab" class="bulleted-list"><li style="list-style-type:disc"><strong>Dual Quaternion Skinning (DQS):</strong> LBS의 단점을 보완하기 위한 방식으로, 회전과 이동을 보다 자연스럽게 처리합니다. 볼륨이 더 잘 보존되지만, 계산 비용이 더 높습니다.</li></ul></div><div style="display:contents" dir="auto"><ul id="1c9e71bd-aa77-8072-b490-d53ebed5d67d" class="bulleted-list"><li style="list-style-type:disc"><strong>Multi-Weight Enveloping (MWE):</strong> 각 정점마다 더 많은 가중치 파라미터를 사용하여 변형을 제어합니다. 더 정확한 결과를 얻을 수 있지만, 메모리 사용량이 증가합니다.</li></ul></div><div style="display:contents" dir="auto"><ul id="1c9e71bd-aa77-8033-848a-e8fe4dafbb13" class="bulleted-list"><li style="list-style-type:disc"><strong>Delta Mush:</strong> 메쉬의 지오메트리를 스무딩하여 스키닝 아티팩트를 제거하는 방식입니다. 고품질의 결과를 얻을 수 있지만, 계산 비용이 매우 높습니다.</li></ul></div><div style="display:contents" dir="auto"><h3 id="1c9e71bd-aa77-80a8-af4b-f4dcdcbc501c" class="">PCA</h3></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-8078-9843-c853446923f0" class="">주성분 분석(Principal Component Analysis, PCA)은 고차원 데이터를 저차원으로 축소하는 차원 감소 기법입니다. 3D 모델링과 SMPL에서 PCA는 다음과 같이 활용됩니다:</p></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-805c-8fc2-ca62024e465e" class="bulleted-list"><li style="list-style-type:disc"><strong>차원 축소:</strong> 복잡한 3D 메쉬 데이터를 더 적은 수의 주요 성분으로 표현</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8078-9963-c64b83921624" class="bulleted-list"><li style="list-style-type:disc"><strong>특징 추출:</strong> 데이터에서 가장 중요한 변동 패턴을 식별하고 추출</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8045-85dc-ff76e881c0cc" class="bulleted-list"><li style="list-style-type:disc"><strong>데이터 압축:</strong> 고차원의 형상 데이터를 효율적으로 저장하고 처리</li></ul></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-8037-a46e-ee3367810fc1" class="">SMPL 모델에서 PCA는 인체의 다양한 형상 변화를 효율적으로 표현하는 데 사용됩니다. 수천 개의 3D 스캔 데이터로부터 추출된 주요 형상 변화 모드를 통해, 적은 수의 파라미터로도 다양한 체형과 자세를 표현할 수 있게 됩니다.</p></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8016-b3ed-cf512b096467" class="bulleted-list"><li style="list-style-type:disc"><strong>형상 공간 표현:</strong> 인체의 다양한 체형을 저차원 파라미터로 효과적으로 표현</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-80e9-86fc-d05baa6cdf8c" class="bulleted-list"><li style="list-style-type:disc"><strong>자세 공간 표현:</strong> 다양한 포즈 변화를 주요 성분으로 분해하여 효율적으로 제어</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8032-b922-ec962a13dc87" class="bulleted-list"><li style="list-style-type:disc"><strong>데이터 일반화:</strong> 새로운 체형과 자세를 생성할 때 현실적인 결과물 도출</li></ul></div><div style="display:contents" dir="auto"><h3 id="1cae71bd-aa77-8001-8c93-ecd436a9c026" class="">Ringing</h3></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-8078-a2c3-ce3431854012" class="">리깅(Rigging)은 3D 캐릭터에 애니메이션을 적용하기 위한 뼈대 구조를 설정하는 과정입니다. 이는 마치 인형의 관절을 만드는 것과 유사한 작업입니다.</p></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-800f-ba75-dd01772ceb30" class="bulleted-list"><li style="list-style-type:disc"><strong>뼈대 구조 생성:</strong> 캐릭터의 움직임을 제어하기 위한 계층적 뼈대 시스템을 구축</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-80c6-ba27-f1161433b70c" class="bulleted-list"><li style="list-style-type:disc"><strong>컨트롤 시스템:</strong> 애니메이터가 캐릭터를 쉽게 조작할 수 있는 컨트롤 요소들을 설정</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8034-84c6-f4ae1a79b6e7" class="bulleted-list"><li style="list-style-type:disc"><strong>제약 조건:</strong> 자연스러운 움직임을 위한 관절의 회전 제한이나 움직임 규칙을 정의</li></ul></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-8050-a7c4-ef4e0d9abab6" class="">리깅은 3D 캐릭터 애니메이션의 핵심 단계로, 잘 설계된 리그는 애니메이터가 캐릭터를 효율적이고 직관적으로 제어할 수 있게 해줍니다.</p></div><div style="display:contents" dir="auto"><h3 id="1cae71bd-aa77-8049-ade0-ff53f5048994" class="">Auto-ringing</h3></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-8031-9fb7-d8e001aff412" class="">Auto-rigging은 3D 캐릭터에 자동으로 리깅(rigging) 시스템을 생성하는 프로세스를 의미합니다. 이는 수동으로 진행하던 복잡한 리깅 작업을 자동화하여 시간과 노력을 절약할 수 있게 해줍니다.</p></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8087-a4c1-e2dabd21ea1c" class="bulleted-list"><li style="list-style-type:disc"><strong>자동 뼈대 생성:</strong> 캐릭터의 메쉬 구조를 분석하여 적절한 위치에 뼈대를 자동으로 배치</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8009-a1ef-fb26fd738f9f" class="bulleted-list"><li style="list-style-type:disc"><strong>자동 웨이트 할당:</strong> 각 뼈대가 주변 메쉬에 미치는 영향력을 자동으로 계산하고 할당</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8081-a51d-c09864bb701d" class="bulleted-list"><li style="list-style-type:disc"><strong>컨트롤 시스템 생성:</strong> 애니메이션 제어를 위한 기본적인 컨트롤러를 자동으로 설정</li></ul></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-8014-aa94-f234c5f0b29b" class="">SMPL 모델에서는 이러한 auto-rigging 기술을 활용하여 다양한 체형의 3D 인체 모델에 대해 일관된 리깅 시스템을 자동으로 적용할 수 있습니다. 이를 통해 모델의 변형과 애니메이션 과정을 더욱 효율적으로 만들 수 있습니다.</p></div><div style="display:contents" dir="auto"><h3 id="1cae71bd-aa77-801e-88e8-d29a18ba6e81" class="">Blend Shape</h3></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-8086-b614-ed4f94eca75e" class="">블렌드 쉐이프(Blend Shape)는 3D 모델의 형태를 변형하는 기술로, 기본 메쉬와 하나 이상의 타겟 메쉬 사이를 부드럽게 전환할 수 있게 해주는 기법입니다.</p></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-80df-9a5f-c107ec4cd5d9" class="bulleted-list"><li style="list-style-type:disc"><strong>형상 보간:</strong> 두 개 이상의 메쉬 형태 사이를 자연스럽게 전환</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-801c-9c65-f476071a0cf9" class="bulleted-list"><li style="list-style-type:disc"><strong>가중치 기반 변형:</strong> 각 타겟 쉐이프에 대한 가중치를 조절하여 다양한 표현 가능</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8022-8e2a-e403ac7e8aad" class="bulleted-list"><li style="list-style-type:disc"><strong>정점 기반 변형:</strong> 각 정점의 위치를 타겟 메쉬의 해당 정점 위치로 보간</li></ul></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-8035-a89f-f7aff3643fea" class="">SMPL 모델에서 블렌드 쉐이프는 다양한 체형과 표정을 표현하는 데 사용됩니다. 이를 통해 체형의 변화나 얼굴 표정의 미세한 변화까지 자연스럽게 표현할 수 있습니다.</p></div><div style="display:contents" dir="auto"><h3 id="1cae71bd-aa77-80d2-957d-d2169ed4f239" class="">Rodrigues Formula</h3></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-8044-96de-c2bebf141439" class="">로드리게스 공식(Rodrigues Formula)은 3D 회전을 표현하는 수학적 공식으로, 축-각도(axis-angle) 표현을 회전 행렬로 변환하는 방법을 제공합니다. SMPL에서 이 공식은 관절의 회전을 계산하는 데 핵심적인 역할을 합니다.</p></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-801d-972b-f6a0c0cd9679" class="bulleted-list"><li style="list-style-type:disc"><strong>기본 원리:</strong> 임의의 회전을 단일 축을 중심으로 한 회전으로 표현</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8074-9a49-cfb4017923b7" class="bulleted-list"><li style="list-style-type:disc"><strong>수학적 표현:</strong> 회전 각도 θ와 회전 축 단위 벡터 k를 사용하여 회전 행렬 R을 계산</li></ul></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-80b1-940d-e8bc85d5f131" class="">로드리게스 공식의 수학적 표현:</p></div><div style="display:contents" dir="auto"><figure id="1cae71bd-aa77-803d-849a-f19b4d9d7bb2" class="equation"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>R</mi><mo>=</mo><mi>I</mi><mo>+</mo><mo stretchy="false">(</mo><mi>sin</mi><mo>⁡</mo><mi>θ</mi><mo stretchy="false">)</mo><mi>K</mi><mo>+</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>cos</mi><mo>⁡</mo><mi>θ</mi><mo stretchy="false">)</mo><msup><mi>K</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">R = I + (\sin \theta)K + (1-\cos \theta)K^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mop">sin</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.1141em;vertical-align:-0.25em;"></span><span class="mop">cos</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">θ</span><span class="mclose">)</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">K</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></span></div></figure></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-8080-9198-e09064d37c13" class="">여기서:</p></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-80d9-983a-f272ca69e0df" class="bulleted-list"><li style="list-style-type:disc">I는 3×3 단위 행렬</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-80d7-be2d-d5f20c05f77f" class="bulleted-list"><li style="list-style-type:disc">K는 회전 축 벡터 k의 외적 행렬</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8000-8595-d6834393b880" class="bulleted-list"><li style="list-style-type:disc">θ는 회전 각도</li></ul></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-8092-bf8e-ce134c941ed7" class="">이 공식은 SMPL 모델에서 골격 구조의 각 관절 회전을 계산하고, 이를 통해 캐릭터의 포즈를 정확하게 제어하는 데 사용됩니다.</p></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-8074-b7ce-df528d31b47f" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="1cae71bd-aa77-8014-bae0-fb9621d3066a" class="">기본 템플렛 메쉬 T</h3></div><div style="display:contents" dir="ltr"><figure id="1cae71bd-aa77-8029-b97e-e9d06842daea" class="image"><a href="img/smpl-01.png"><img style="width:466.984375px" src="img/smpl-01.png"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="1cae71bd-aa77-8087-addc-cad46fe1476b" class="image"><a href="img/smpl-02.png"><img style="width:466.96875px" src="img/smpl-02.png"/></a></figure></div><div style="display:contents" dir="auto"><h3 id="1cae71bd-aa77-809c-8e8e-c3d0b8943241" class="">블렌드 웨이트</h3></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8016-b321-ca0dd0cc612f" class="bulleted-list"><li style="list-style-type:disc">각 정점(vertex)이 어느 관절(joint)에 얼마나 영향을 받는지를 수치로 나타낸 것</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8033-b355-cca2a7f328e7" class="bulleted-list"><li style="list-style-type:disc">사람 몸이 움직이면, 뼈(관절)뿐 아니라 <strong>피부/근육(=메쉬)</strong> 도 같이 움직여야 현실감 있어.<br/>하지만 모든 정점이 한 관절만 따라가면 <strong>움직임이 부자연스러움</strong>.<br/>그래서! <strong>여러 관절의 영향을 &#x27;비율&#x27;로 섞어줌</strong> = 블렌드 웨이트</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-80d9-9456-e2e6cd8fb54e" class="bulleted-list"><li style="list-style-type:disc"></li></ul></div><div style="display:contents" dir="ltr"><figure id="1cae71bd-aa77-80fb-ad4f-e3dd6a38365b" class="image"><a href="img/smpl-03.png"><img style="width:466.984375px" src="img/smpl-03.png"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="1cae71bd-aa77-8065-95d8-dcd52cce8ed4" class="image"><a href="img/smpl-04.png"><img style="width:466.96875px" src="img/smpl-04.png"/></a></figure></div><div style="display:contents" dir="auto"><h3 id="1cae71bd-aa77-8034-a53a-f68f53d3c3f7" class="">모델 구성요소</h3></div><div style="display:contents" dir="ltr"><figure id="1cae71bd-aa77-8097-8922-c2057f7d42d4" class="image"><a href="img/smpl-05.png"><img style="width:466.984375px" src="img/smpl-05.png"/></a></figure></div><div style="display:contents" dir="auto"><h3 id="1cae71bd-aa77-80ed-a460-d2beaaca7060" class="">최종 정점 위치 계산</h3></div><div style="display:contents" dir="ltr"><figure id="1cae71bd-aa77-80ec-89e7-c22a59834a81" class="image"><a href="img/smpl-06.png"><img style="width:466.96875px" src="img/smpl-06.png"/></a></figure></div><div style="display:contents" dir="auto"><h3 id="1cae71bd-aa77-80b1-a10c-eb76c22b2c54" class="">최종 모델 정의</h3></div><div style="display:contents" dir="ltr"><figure id="1cae71bd-aa77-80f4-93fd-d05900f3dcc9" class="image"><a href="img/smpl-07.png"><img style="width:466.96875px" src="img/smpl-07.png"/></a></figure></div><div style="display:contents" dir="auto"><h3 id="1cae71bd-aa77-8077-b9ab-dc421ab54d5b" class="">Blend Skinning(LBS)</h3></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8079-bdb5-c9e2c55011b8" class="bulleted-list"><li style="list-style-type:disc">blend shapes are vectors of vertices represented by bold capital letters (e.g. X)</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8000-a7a4-ddbcc4139567" class="bulleted-list"><li style="list-style-type:disc">lowercase bold letters (e.g. xi 2 R3) are vectors<br/>representing a particular vertex</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8058-9a95-fe3e2af47e41" class="bulleted-list"><li style="list-style-type:disc"> <div style="display:contents" dir="auto"><figure id="1cae71bd-aa77-801c-8edb-c3b89a1f7131" class="equation"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mover accent="true"><mi>ω</mi><mo>ˉ</mo></mover><mi>k</mi></msub><mo>∈</mo><msup><mi mathvariant="double-struck">R</mi><mn>3</mn></msup></mrow><annotation encoding="application/x-tex">\bar{\omega}_k \in \mathbb{R}^3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7178em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.25em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">∈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8641em;"></span><span class="mord"><span class="mord mathbb">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span></span></span></span></span></span></span></span></span></div></figure></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-8080-841e-e01d57fda480" class="">denotes the axis-angle representation of the relative rotation of part k with respect to its parent in the kinematic tree</p></div></li></ul></div><div style="display:contents" dir="auto"><figure id="1cae71bd-aa77-8067-8e17-eb2ec5cdf952" class="equation"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>exp</mi><mo>⁡</mo><mo stretchy="false">(</mo><msub><mover accent="true"><mi>ω</mi><mo>ˉ</mo></mover><mi>j</mi></msub><mo stretchy="false">)</mo><mo>=</mo><mi>I</mi><mo>+</mo><msub><mover accent="true"><mi>w</mi><mo>^</mo></mover><mi>j</mi></msub><mi>sin</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mi mathvariant="normal">∥</mi><msub><mover accent="true"><mi>ω</mi><mo>ˉ</mo></mover><mi>j</mi></msub><mi mathvariant="normal">∥</mi><mo fence="true">)</mo></mrow><mo>+</mo><msubsup><mover accent="true"><mi>w</mi><mo>^</mo></mover><mi>j</mi><mn>2</mn></msubsup><mi>cos</mi><mo>⁡</mo><mrow><mo fence="true">(</mo><mi mathvariant="normal">∥</mi><msub><mover accent="true"><mi>ω</mi><mo>ˉ</mo></mover><mi>j</mi></msub><mi mathvariant="normal">∥</mi><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\exp(\bar{\omega}_j) = I + \hat{w}_j \sin\left(\|\bar{\omega}_j\|\right) + \hat{w}_j^2 \cos\left(\|\bar{\omega}_j\|\right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mop">exp</span><span class="mopen">(</span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.25em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.0361em;vertical-align:-0.2861em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6944em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">^</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">sin</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">∥</span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.25em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mord">∥</span><span class="mclose delimcenter" style="top:0em;">)</span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1.2472em;vertical-align:-0.3831em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6944em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.02691em;">w</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1667em;"><span class="mord">^</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-2.453em;margin-left:-0.0269em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.3831em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">cos</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">∥</span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.5678em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.25em;"><span class="mord">ˉ</span></span></span></span></span></span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0359em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em;"><span></span></span></span></span></span></span><span class="mord">∥</span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span></span></span></div></figure></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-80a5-ae26-fe52fb4b81d7" class="">
+</p></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-8063-b48b-c06de633143e" class="">
+</p></div><div style="display:contents" dir="auto"><h3 id="1cae71bd-aa77-809f-8fb9-c6587a2886a3" class="">Shape Parameter Vector</h3></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-8078-9df3-c5e223bc0a35" class="">Shape Parameter Vector(β)는 SMPL 모델에서 인체의 체형을 제어하는 매개변수 벡터입니다. 이는 다양한 체형 특성을 수치적으로 표현하여 기본 템플릿 메쉬를 원하는 체형으로 변형할 수 있게 해줍니다.</p></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-804d-add0-d556a2678c7b" class="bulleted-list"><li style="list-style-type:disc"><strong>차원:</strong> 일반적으로 10개의 주요 체형 특성을 포함하는 10차원 벡터로 표현</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8018-be85-d725cd8e9ee1" class="bulleted-list"><li style="list-style-type:disc"><strong>PCA 기반:</strong> 수천 개의 3D 스캔 데이터로부터 주성분 분석(PCA)을 통해 추출된 주요 체형 변화 모드를 나타냄</li></ul></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8004-9a2c-f03bb4e0c4b0" class="bulleted-list"><li style="list-style-type:disc"><strong>선형 조합:</strong> 각 매개변수 값을 조절하여 키, 체중, 근육량 등 다양한 체형 특성을 선형적으로 결합</li></ul></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-801e-81b2-db7d5cd9608b" class="">이러한 Shape Parameter Vector를 통해 SMPL 모델은 다양한 체형의 인체 모델을 효율적으로 생성하고 제어할 수 있습니다.</p></div><div style="display:contents" dir="ltr"><figure id="1cae71bd-aa77-80a2-b69c-e8f8056fda04" class="image"><a href="img/smpl-08.png"><img style="width:453.0000305175781px" src="img/smpl-08.png"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="1cae71bd-aa77-80a0-b504-f7a4ad5e4793" class="image"><a href="img/smpl-09.png"><img style="width:466.984375px" src="img/smpl-09.png"/></a></figure></div><div style="display:contents" dir="auto"><figure id="1cae71bd-aa77-8014-a7ea-e2a163aa3660" class="equation"><style>@import url('https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex-swap.min.css')</style><div class="equation-container"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>T</mi><mo>+</mo><msub><mi>B</mi><mi>S</mi></msub><mo stretchy="false">(</mo><mi>β</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T + B_S(\beta)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:-0.0502em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05764em;">S</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05278em;">β</span><span class="mclose">)</span></span></span></span></span></div></figure></div><div style="display:contents" dir="ltr"><figure id="1cae71bd-aa77-800e-9ece-ed6258128066" class="image"><a href="img/smpl-10.png"><img style="width:466.984375px" src="img/smpl-10.png"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="1cae71bd-aa77-8036-9c25-def5af22f0d8" class="image"><a href="img/smpl-11.png"><img style="width:466.984375px" src="img/smpl-11.png"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="1cae71bd-aa77-800a-bd6a-c08ddfa2270c" class="image"><a href="img/smpl-12.png"><img style="width:466.953125px" src="img/smpl-12.png"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="1cae71bd-aa77-80b8-8b07-faba5133cccd" class="image"><a href="img/smpl-13.png"><img style="width:466.984375px" src="img/smpl-13.png"/></a></figure></div><div style="display:contents" dir="auto"><h3 id="1cae71bd-aa77-80af-af5e-ecee1fdd5c70" class="">Joint locations</h3></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-80c5-8ec7-fc6db86f0ee6" class="bulleted-list"><li style="list-style-type:disc">T로부터 추론 가능</li></ul></div><div style="display:contents" dir="auto"><h3 id="1cae71bd-aa77-801b-8fb0-c9b2249122dc" class="">MABS</h3></div><div style="display:contents" dir="auto"><ul id="1cae71bd-aa77-8013-8f14-cd7a952dd968" class="bulleted-list"><li style="list-style-type:disc">Mean Average per-vertex Bone Surface distance</li></ul></div><div style="display:contents" dir="ltr"><figure id="1cae71bd-aa77-8054-82b2-e65bebe74d57" class="image"><a href="img/smpl-14.png"><img style="width:466.984375px" src="img/smpl-14.png"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="1cae71bd-aa77-8010-81f6-fd3fb681d86c" class="image"><a href="img/smpl-15.png"><img style="width:710px" src="img/smpl-15.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="1cae71bd-aa77-80f7-9c10-ff5263b445eb" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
