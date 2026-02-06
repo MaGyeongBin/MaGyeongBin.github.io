@@ -28,11 +28,10 @@ twitter_username: jekyllrb
 github_username:  MaGyeongBin
 
 # Build settings
-remote_theme: PQuod/simply-cyan-theme
+# Use local layouts/styles (no remote theme)
 plugins:
   - jekyll-feed
   - jekyll-paginate
-  - jekyll-remote-theme
 
 # Pagination
 paginate: 7
