@@ -68,4 +68,5 @@ footer_text: "Follow: Feed · © 2026 kimjy99 · Powered by Jekyll & Minimal Mis
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
-theme: simply-cyan
+# no remote theme; use local _sass copies of simply-cyan
+theme: null
