@@ -1,0 +1,29 @@
+<article class="post-list-item">
+  <div class="post-list-title">
+    <a href="{{ include.post.url }}">{{ include.post.title }}</a>
+  </div>
+
+  <div class="post-list-meta">
+    <span class="post-list-date">📅 {{ include.post.date | date: "%Y년 %m월 %d일" }}</span>
+    {% if include.post.categories %}
+      {% for cat in include.post.categories %}
+        {% assign cat_data = site.data.categories.categories | where: "name", cat | first %}
+        <span class="post-category">{{ cat_data.icon }} {{ cat }}</span>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  {% if include.post.excerpt %}
+  <p class="post-list-excerpt">
+    {{ include.post.excerpt | strip_html | truncate: 180 }}
+  </p>
+  {% endif %}
+
+  {% if include.post.tags and include.post.tags.size > 0 %}
+  <div class="post-list-tags">
+    {% for tag in include.post.tags %}
+      <span class="tag">{{ tag }}</span>
+    {% endfor %}
+  </div>
+  {% endif %}
+</article>

@@ -1,25 +1,31 @@
-{%- include head.html -%}
-<body class="{% if page.layout == 'post' %}is-post{% endif %}">
-  {%- include functions.html -%}
-  {%- unless page.layout == "post" -%}
-    {%- include header.html -%}
+<!doctype html>
+<html lang="{{ site.lang | default: 'en' }}">
 
-    <div class="hero-search">
-      <form class="search-form" method="get" action="https://www.google.com/search" onsubmit="this.q.value='site:{{ site.url }} '+this.q.value">
-        <input type="text" name="q" placeholder="Search this site" aria-label="Search">
-        <button type="submit">Search</button>
-      </form>
+  {%- include head.html -%}
+
+  <body class="{% if page.layout == 'post' %}is-post{% endif %}">
+    {%- include functions.html -%}
+
+    {%- unless page.layout == "post" -%}
+      {%- include header.html -%}
+
+      <div class="hero-search">
+        <form class="search-form" method="get" action="https://www.google.com/search"
+              onsubmit="this.q.value='site:{{ site.url }} '+this.q.value">
+          <input type="text" name="q" placeholder="Search this site" aria-label="Search">
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    {%- endunless -%}
+
+    <div class="layout-with-sidebar">
+      {%- include sidebar.html -%}
+      <main class="page_content" aria-label="Content">
+        {{ content }}
+      </main>
     </div>
-  {%- endunless -%}
 
-  <div class="layout-with-sidebar">
-    {%- include sidebar.html -%}
-    <main class="page_content" aria-label="Content">
-      {{ content | markdownify }}
-    </main>
-  </div>
-
-  {%- include footer.html -%}
-  {%- include functionsscript.html -%}
-</body>
+    {%- include footer.html -%}
+    {%- include functionsscript.html -%}
+  </body>
 </html>

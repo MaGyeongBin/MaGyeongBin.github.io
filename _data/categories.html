@@ -1,0 +1,24 @@
+---
+layout: default
+permalink: /categories/:category/
+---
+
+{% assign category_name = page.url | split: '/' | last %}
+{% assign category_data = site.data.categories.categories | where: "slug", category_name | first %}
+
+<div class="categories-page">
+  <h1>{{ category_data.icon }} {{ category_data.name }}</h1>
+  <p class="category-description">{{ category_data.description }}</p>
+
+  <div class="post-list">
+    {% assign filtered_posts = site.posts | where_exp: "post", "post.categories contains category_data.name" %}
+    
+    {% if filtered_posts.size > 0 %}
+      {% for post in filtered_posts %}
+        {% include post-card.html post=post %}
+      {% endfor %}
+    {% else %}
+      <p class="no-posts">아직 게시물이 없습니다.</p>
+    {% endif %}
+  </div>
+</div>

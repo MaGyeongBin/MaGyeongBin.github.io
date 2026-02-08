@@ -1,0 +1,21 @@
+categories:
+  - name: 논문리뷰
+    slug: paper-review
+    icon: 📚
+    description: 논문 리뷰 및 분석
+  - name: 공부
+    slug: study
+    icon: 📖
+    description: 공부 기록 및 정리
+  - name: 영화
+    slug: movie
+    icon: 🎬
+    description: 영화 리뷰 및 감상평
+  - name: 음악
+    slug: music
+    icon: 🎵
+    description: 음악 리뷰 및 추천
+  - name: 여행
+    slug: travel
+    icon: ✈️
+    description: 여행 기록 및 정보
