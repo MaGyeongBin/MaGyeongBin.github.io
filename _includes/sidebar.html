@@ -1,6 +1,6 @@
 <aside class="site-sidebar">
   <div class="sidebar-card profile">
-    <div class="sidebar-name">{{ site.title }}</div>
+    <div class="sidebar-name"><a class="sidebar-home-link" href="{{ '/' | relative_url }}">{{ site.title }}</a></div>
     <p class="sidebar-bio">{{ site.description }}</p>
     <ul class="sidebar-meta">
       {% if site.sidebar.location %}<li>🗺️ <a href="https://maps.google.com/?q={{ site.sidebar.location | uri_escape }}" target="_blank" rel="noopener">{{ site.sidebar.location }}</a></li>{% endif %}
@@ -19,10 +19,10 @@
   <div class="sidebar-card categories">
     <div class="sidebar-section-title">카테고리</div>
     <ul class="sidebar-category-list">
-      <li><a href="{{ site.baseurl }}/categories#논문리뷰">논문리뷰</a></li>
-      <li><a href="{{ site.baseurl }}/categories#영화">영화</a></li>
-      <li><a href="{{ site.baseurl }}/categories#음악">음악</a></li>
-      <li><a href="{{ site.baseurl }}/categories#여행">여행</a></li>
+      <li><a href="{{ '/categories/논문리뷰/' | relative_url }}">논문리뷰</a></li>
+      <li><a href="{{ '/categories/영화/' | relative_url }}">영화</a></li>
+      <li><a href="{{ '/categories/음악/' | relative_url }}">음악</a></li>
+      <li><a href="{{ '/categories/여행/' | relative_url }}">여행</a></li>
     </ul>
   </div>
 </aside>

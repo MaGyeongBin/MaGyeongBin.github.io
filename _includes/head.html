@@ -11,6 +11,9 @@
     <link rel="icon" type="image/png" href="{{ '/assets/img/typing-monkey.png' | relative_url }}">
     <link rel="apple-touch-icon" href="{{ '/assets/img/typing-monkey.png' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/styles.css' | relative_url }}">
+    {% if page.layout == "post" %}
+      <link rel="stylesheet" href="{{ '/assets/post.css' | relative_url }}">
+    {% endif %}
     {%- if jekyll.environment == 'production' and site.google_analytics -%}
       {%- include google-analytics.html -%}
     {%- endif -%}

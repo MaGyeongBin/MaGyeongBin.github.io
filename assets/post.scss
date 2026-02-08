@@ -1,0 +1,42 @@
+---
+---
+
+/* Post-page specific overrides */
+
+/* Hide banner/search on post pages, shrink title */
+.is-post .monkey-header,
+.is-post .hero-search {
+  display: none;
+}
+
+.is-post .site_title,
+.is-post .site-title {
+  font-size: 1.8rem;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.is-post .layout-with-sidebar {
+  padding-top: var(--spacing-xl);
+}
+
+/* Post meta (date/categories) on post page */
+.post-meta-top {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin: 0 0 var(--spacing-md) 0;
+}
+
+.post-meta-top .post-date {
+  margin-right: var(--spacing-md);
+}
+
+.post-meta-top .post-cats a {
+  color: var(--accent-primary);
+}
+
+.post-meta-top .post-cats a:hover {
+  color: var(--accent-hover);
+  text-decoration: underline;
+  text-decoration-color: var(--accent-hover);
+}

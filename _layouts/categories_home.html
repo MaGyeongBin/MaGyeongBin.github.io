@@ -1,0 +1,40 @@
+---
+layout: default
+---
+
+{% assign cats = site.categories %}
+{% if page.category %}
+  {% assign cats = cats | where_exp: 'c', 'c[0] == page.category' %}
+{% endif %}
+
+<div class="categories-page">
+  {% for category in cats %}
+    <h2>{{ category[0] }}</h2>
+
+    <div class="post-list">
+      {% for post in category[1] %}
+      <article class="post-list-item">
+        <div class="post-list-title">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </div>
+
+        <div class="post-list-date">
+          📅 {{ post.date | date: "%Y년 %m월 %d일" }}
+        </div>
+
+        <p class="post-list-excerpt">
+          {{ post.excerpt | strip_html | truncate: 180 }}
+        </p>
+
+        {% if post.tags %}
+        <div class="post-list-tags">
+          {% for tag in post.tags %}
+            <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>

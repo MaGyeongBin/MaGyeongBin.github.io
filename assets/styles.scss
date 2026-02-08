@@ -424,10 +424,12 @@ main.page_content {
 .site-sidebar {
   position: sticky;
   top: var(--spacing-xl);
+  align-self: start;
   font-size: var(--font-size-sm);
   line-height: var(--line-height-normal);
   margin-left: 0;
   transform: translateX(-200px);
+  height: fit-content;
 }
 
 @media (max-width: 900px) {
@@ -619,6 +621,7 @@ main.page_content {
   flex-wrap: wrap;
   gap: var(--spacing-xs);
 }
+
 
 .tag {
   padding: 0px 8px;
