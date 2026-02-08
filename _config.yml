@@ -38,7 +38,6 @@ paginate: 7
 paginate_path: "/page:num/"
 
 # UI toggles
-darkmode: true
 typosize: false
 
 # Sidebar info
