@@ -1,42 +1,105 @@
 ---
 ---
 
-/* Post-page specific overrides */
+/* ==========================================================================
+   Post-page specific overrides (clean & readable)
+   ========================================================================== */
 
-/* Hide banner/search on post pages, shrink title */
+/* 1) Hide banner/search on post pages */
 .is-post .monkey-header,
 .is-post .hero-search {
   display: none;
 }
 
+/* 2) Post page top spacing: give content breathing room */
+.is-post .layout-with-sidebar {
+  padding-top: var(--spacing-3xl);
+}
+
+/* 3) Site title: smaller but still classy */
 .is-post .site_title,
 .is-post .site-title {
-  font-size: 1.8rem;
-  line-height: 1.2;
+  font-size: 1.6rem;
+  line-height: 1.15;
   margin: 0;
+  letter-spacing: -0.01em;
 }
 
-.is-post .layout-with-sidebar {
-  padding-top: var(--spacing-xl);
+/* 4) Page typography: tighten headings a bit for posts */
+.is-post main.page_content h1 {
+  margin-top: 0;
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
 }
 
-/* Post meta (date/categories) on post page */
+.is-post main.page_content h2 {
+  margin-top: 1.8rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+
+.is-post main.page_content p {
+  line-height: 1.6;
+}
+
+/* 5) Post meta block: make it look like a subtle chip row */
 .post-meta-top {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  margin: 0 0 var(--spacing-md) 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+
+  font-size: 0.88rem;
+  color: var(--text-tertiary);
+  margin: 0 0 var(--spacing-2xl) 0;
+  padding: 10px 12px;
+
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
 }
 
+/* optional: small dot separator vibe */
+.post-meta-top .post-date::before {
+  content: "🗓️";
+  margin-right: 6px;
+  opacity: 0.9;
+}
+
+.post-meta-top .post-cats::before {
+  content: "🏷️";
+  margin-right: 6px;
+  opacity: 0.9;
+}
+
+/* remove old margin-based spacing */
 .post-meta-top .post-date {
-  margin-right: var(--spacing-md);
+  margin-right: 0;
 }
 
+/* categories link styling */
 .post-meta-top .post-cats a {
   color: var(--accent-primary);
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .post-meta-top .post-cats a:hover {
   color: var(--accent-hover);
-  text-decoration: underline;
-  text-decoration-color: var(--accent-hover);
+  border-bottom-color: var(--accent-hover);
+  text-decoration: none;
 }
+
+/* 6) Optional: tighten list spacing on post pages */
+.is-post main.page_content ul,
+.is-post main.page_content ol {
+  margin-top: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.is-post main.page_content li {
+  margin: 0.25rem 0;
+}
+
+
