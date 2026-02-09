@@ -4,7 +4,19 @@ no_banner: true
 ---
 
 <div class="post-body-card">
-  {% include paper-banner.html %}
+{% if page.paper %}
+  {% include paper-banner.html
+     venue=page.paper.venue
+     date=page.paper.date
+     title=page.paper.title
+     authors=page.paper.authors
+     affiliation=page.paper.affiliation
+     paper_url=page.paper.paper_url
+     project_url=page.paper.project_url
+     github_url=page.paper.github_url
+  %}
+{% endif %}
+
 
   <div class="post-meta-top">
   </div>
